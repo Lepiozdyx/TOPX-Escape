@@ -17,12 +17,14 @@ enum LaunchRoute {
 @Observable
 final class LaunchCoordinator {
     private(set) var route: LaunchRoute = .loading
+    private(set) var scenePhase: ScenePhase = .background
 
     private let attribution = AppsFlyerService()
     private let webRouteResolver = WebRouteResolver()
     private var didBeginLaunch = false
 
     func scenePhaseDidChange(_ phase: ScenePhase) {
+        scenePhase = phase
         attribution.scenePhaseDidChange(phase)
         guard phase == .active, !didBeginLaunch else { return }
 

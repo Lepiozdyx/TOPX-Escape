@@ -9,6 +9,7 @@ struct LaunchView: View {
             LoadingView()
         case .native:
             NativeRootView()
+                .environment(\.scenePhase, launch.scenePhase)
         case .web(let url):
             WebView(url: url)
         }
